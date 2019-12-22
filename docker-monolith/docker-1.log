@@ -1,0 +1,4 @@
+sha256:1ea4a450ba7e20a1ba5ad9910d3c28105365c2c505890d1473b678c502051f28
+
+Image doesn't have state - container has. Also container as opposed to static image, could has mounts and network settings.
+
