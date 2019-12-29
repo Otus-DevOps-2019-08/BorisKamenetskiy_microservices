@@ -46,4 +46,14 @@ Homework docker-3 - what was done:
 
 Issues:
 - EC2 t2.micro machine doesn't fit for homework purposes, as docker images are huge. And I don't have Linux installed on my local machine to try everything out;
-- spent some time, trying to figure out how to install gcc in post module.  
+- spent some time, trying to figure out how to install gcc in post module.
+
+Howework Docker-4 - what was done:
+- docker run with none module run - only loopback network interface present;
+- docker run with host module run - docker0, loopback, bridge and external ethernet to connect with bridge are visible;
+- docker-machine ssh docker-host ifconfig run - docker0, loopback and ens4 are visible;
+- running "sudo docker run --network host -d nginx" provided one container only. Probably, that is the case because the same interface with the same service is used (the port for nginx is already occupied);
+- running containers with none and host modules, sudo ip netns shows new net-namespace for none only;
+- bridge network created;
+- reddit project is started using bridge network;
+   
