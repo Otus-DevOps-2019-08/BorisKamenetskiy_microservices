@@ -76,8 +76,9 @@ Howework Docker-4 - what was done:
 - parameterized docker-compose.yml: variables PUBLISHPORT, COMMENTVER, UIVER, POSTVER added (they are also added to .env). .env.example as copy of .env creted;
 - aliases, front_net and back_net added to docker-compose.yml;
 - after docker-compose up -d application works as expected;
-- docker-compose adds prefix to all created resources (by default it is equal to the folder, where we are). This prefix could be overridden by using -p option.  
+- docker-compose adds prefix to all created resources (by default it is equal to the folder, where we are). This prefix could be overridden by using -p option;
+- some changes to Dockerfile's in accordance with Hadolint recommendations added.
 
 Issues:
 - some really weird issues with starting the containers using docker-compose. After some manual actions (starting containers) and killing them docker-compose suddenly worked;
-- still have to figure out how to use linters (hadolint).
+- was not able to build hadolint locally, so, I have used Hadolint from docker container. As the topic is docker containers, probably, not worst solution :).
