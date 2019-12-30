@@ -46,4 +46,39 @@ Homework docker-3 - what was done:
 
 Issues:
 - EC2 t2.micro machine doesn't fit for homework purposes, as docker images are huge. And I don't have Linux installed on my local machine to try everything out;
-- spent some time, trying to figure out how to install gcc in post module.  
+- spent some time, trying to figure out how to install gcc in post module.
+
+Howework Docker-4 - what was done:
+- docker run with none module run - only loopback network interface present;
+- docker run with host module run - docker0, loopback, bridge and external ethernet to connect with bridge are visible;
+- docker-machine ssh docker-host ifconfig run - docker0, loopback and ens4 are visible;
+- running "sudo docker run --network host -d nginx" provided one container only. Probably, that is the case because the same interface with the same service is used (the port for nginx is already occupied);
+- running containers with none and host modules, sudo ip netns shows new net-namespace for none only;
+- bridge network created;
+- reddit project is started using bridge network;
+- migrated to new large ec2 instance;
+- conducted the experiment with mounted volume for docker-3 homework - post remained at http://34.77.21.114:9292/;
+- tried to run containers without network aliases - problem encountered;
+- network aliases set - everything is fine;
+- two docker networks created - back_net and front_net;
+- containers run, but the app didn't work;
+- post and comment added to both networks using docker network connect - applicartion works now;
+- found all network id's using docker network ls - for reddit, front_net, back_net;
+- bridge interfaces for all the beforementioned networks found;
+- one of bridge interfaces is analyzed using brctl show;
+- iptables investigated - POSTROUTING table is not 100% clear for me - would ask to explain once again;
+- found rule for ui container;
+- found the process docker-proxy;
+- docker compose installed;
+- docker-compose.yml created - the file is clear;
+- USERNAME exported, so, that docker-compose could work;
+- docker-compose up -d && docker-compose ps -> applications works fine (after starting container manually, killing all the containers and then - docker-compose up -d !!!);
+- parameterized docker-compose.yml: variables PUBLISHPORT, COMMENTVER, UIVER, POSTVER added (they are also added to .env). .env.example as copy of .env creted;
+- aliases, front_net and back_net added to docker-compose.yml;
+- after docker-compose up -d application works as expected;
+- docker-compose adds prefix to all created resources (by default it is equal to the folder, where we are). This prefix could be overridden by using -p option;
+- some changes to Dockerfile's in accordance with Hadolint recommendations added.
+
+Issues:
+- some really weird issues with starting the containers using docker-compose. After some manual actions (starting containers) and killing them docker-compose suddenly worked;
+- was not able to build hadolint locally, so, I have used Hadolint from docker container. As the topic is docker containers, probably, not worst solution :).
