@@ -79,4 +79,5 @@ Howework Docker-4 - what was done:
 - docker-compose adds prefix to all created resources (by default it is equal to the folder, where we are). This prefix could be overridden by using -p option.  
 
 Issues:
-- some really weird issues with starting the containers using docker-compose. After some manual actions (starting containers) and killing them docker-compose suddenly worked.
+- some really weird issues with starting the containers using docker-compose. After some manual actions (starting containers) and killing them docker-compose suddenly worked;
+- still have to figure out how to use linters (hadolint).
