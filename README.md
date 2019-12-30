@@ -26,4 +26,24 @@ Homework docker-2 - what was done:
 
 Issues:
 - because of lack of space was not able to run reddit on local machine.
- 
+
+Homework docker-3 - what was done:
+- re-created EC2 instance in Amazon, as previous was out of space;
+- installed git and checked out my code;
+- installed docker and docker-machine;
+- logged in to DockerHub;
+- copied archive into my repo;
+- renamed unzipped archive to src;
+- created Dockerfile with code from gist in post-py, comment, ui folders;
+- in post-py I had to append the code with gcc installation using apk;
+- downloaded the latest image of MongoDB;
+- built images for post, comment, ui;
+- created network reddit and run containers for post, ui, comment, mongodb with pre-defined aliases;
+- checked http://35.205.32.231:9292/ - everything worked fine;
+- checked image size - for ui it was more than 700 Mb;
+- after modifying Dockerfile for UI I was not able to re-build the corresponding image, as no space left;
+- killing all images didn't help.
+
+Issues:
+- EC2 t2.micro machine doesn't fit for homework purposes, as docker images are huge. And I don't have Linux installed on my local machine to try everything out;
+- spent some time, trying to figure out how to install gcc in post module.  
