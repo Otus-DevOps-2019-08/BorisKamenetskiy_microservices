@@ -82,3 +82,26 @@ Howework Docker-4 - what was done:
 Issues:
 - some really weird issues with starting the containers using docker-compose. After some manual actions (starting containers) and killing them docker-compose suddenly worked;
 - was not able to build hadolint locally, so, I have used Hadolint from docker container. As the topic is docker containers, probably, not worst solution :).
+
+2020-03-01
+Gitlab-ci-1 homework - what was done:
+- new gcloud machine with enough space created;
+- docker installed manually;
+- directories /srv/gitlab/config, /srv/gitlab/data/ /srv/gitlab/logs created, docker-compose.yml prepared;
+- container with gitlab ci started using docker-compose up -d;
+- gitlab ci was available at http://35.234.126.242;
+- registered as root and registration of other users is switched off;
+- new group and new project created;
+- git connected with repo on the created host;
+- template of .gitlab-ci.yml created and pushed to gitlab server;
+- runner added and registered;
+- pipeline passed;
+- reddit src code added to the gitlab repo;
+- test_unit_job in .gitlab-ci.yml changed, simpletest.rb added;
+- library for testing added to reddit/Gemfile;
+- now test runs on each code change;
+- deploy_dev_job added, after pipeline passed new dev environment is visible;
+- staging and production environments with manual run added;
+- staging and production deployments are possible only for tagged commits;
+- dynamic environment for each branch, except for master, defined.
+
