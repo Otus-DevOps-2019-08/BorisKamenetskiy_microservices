@@ -145,3 +145,9 @@ https://hub.docker.com/repository/docker/boriskamenetskiy/$SERVICE_NAME
 Issues:
 - after stopping post service ui_health was still equal to 1, though ui_health_post_availability dropped to 0.
 
+Monitoring-2 homework - what was done:
+- 
+
+Issues:
+-
+
