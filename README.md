@@ -146,8 +146,45 @@ Issues:
 - after stopping post service ui_health was still equal to 1, though ui_health_post_availability dropped to 0.
 
 Monitoring-2 homework - what was done:
-- 
+- docker-host created and local environment configured to work with it;
+- monitoring and application separated - monitoring migrated to docker-compose-monitoring.yml;
+- cadvisor service added to docker-compose-monitoring.yml;
+- job for cadvisor added to prometheus to gather metrics;
+- prometheus re-built;
+- cAdvisor works as expected - information about running containers visible;
+- checked in Prometheus, that cAdvisor metrics are gathered;
+- grafana service added to docker-compose-monitoring.yml;
+- run grafana service, logged in;
+- added relevant data source;
+- on the grafana website chosen Docker and system monitoring dashboard, imported it into working grafana container on docker-host;
+- graphs are visible;
+- folder monitoring/grafana/dashboards created;
+- dashboard saved as DockerMonitoring.json in monitoring/grafana/dashboards;
+- job for post service added to prometheus.yml to gather corresponding metrics;
+- prometheus re-built;
+- docker infrastructure re-created;
+- new dashboard created in Grafana;
+- ui_request_count added (later function rate added to this metric);
+- title and description for the graph added, dashboard saved;
+- graph (with label and description) for HTTP error requests added and checked via incorrect http request;
+- histogram (95% percentile) for request latency metric added;
+- dashboard saved as UI_Service_Monitoring.json to monitoring/grafana/dashboards;
+- new dashboard created;
+- business metrics rate(post_count[1h]) and rate(comment_count[1h]) added to this dashboard;
+- dashboard saved as Business_Logic_Monitoring.json to monitoring/grafana/dashboards;
+- directory monitoring/alertmanager created with corresponding Dockerfile; 
+- webhook integrated to slack channel, file config.yml created and webhook added there;
+- alertmanager image built;
+- alertmanager service added to docker-compose-monitoring.yml;
+- file alerts.yml created in monitoring/prometheus folder (the rule is: if service is down for 1 minute, alert is triggered and sent to the slack channel);
+- operation of copying alerts.yml added to the Dockerfile;
+- information about alerting rules added to prometheus.yml
+- prometheus image re-built;
+- alerting checked for comment and posrt services. After stopping those services alerts were visible in Prometheus web-interface, Alertmanager interface and in the slack channel as well;
+- all images pushed to DockerHub;
+- docker-host removed. 
 
 Issues:
--
+- comment service was not working because in docker-compose.yml comment_db was not added to mongodb aliases;
+- by mistake killed docker-host before checks passed, had to create dashboards again.
 
