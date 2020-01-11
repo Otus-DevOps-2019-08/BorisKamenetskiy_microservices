@@ -105,3 +105,43 @@ Gitlab-ci-1 homework - what was done:
 - staging and production deployments are possible only for tagged commits;
 - dynamic environment for each branch, except for master, defined.
 
+2020-01-08 
+Monitoring-1 homework - what was done:
+- new machine in gcloud set up and configured properly;
+- firewall rules prometheus-default and puma-default created;
+- docker-host created, local environment is configured to work with docker-host;
+- prometheus container run;
+- prometheus works from web interface;
+- prometheus_build_info metric checked;
+- targets checked - there is prometheus only;
+- host:port/metrics checked - saw the metrics, gathered by Prometheus;
+- container prometheus stopped;
+- directory structure inside repository root directory was amended (first - incorrectly, I have moved ui, post and comment to the docker folder directly and removed src folder; I had to re-create src folder later);
+- build instructions deleted from docker-compose.yml;
+- directory monitoring/prometheus created. Dockerfile with prometheus image created;
+- prometheus.yml created (with jobs for monitoring of prometheus, ui, comment with 5s interval);
+- prometheus image built;
+- images of post, ui, comment built using docker_build.sh;
+- prometheus service added to docker-compose.yml (metrics are stored for 1 day);
+- networks section added for prometheus service;
+- after docker-compose up -d application works fine, prometheus works as well;
+- targets checked (they are in accordance with prometheus.yml);
+- ui_health metric checked;
+- post service stopped (for some reason ui_health is still one, though metric for ui_health_post_availability dropped to 0);
+- started post service - ui_health_post_availability returned to 1. Repeated experiment with post_db (stopped this container and then started it);
+- added node exporter service to docker-compose.yml (with network section);
+- added 'node' job to Prometheus monitoring in prometheus.yml;
+- docker image for prometheus re-built;
+- after docker-compose down and docker-compose up -d node appeared among target endpoints in web gui for Prometheus;
+- CPU usage checked (metric node_load1);
+- stress test (via connection to docker host and creating artificial load) conducted - CPU usage curve changed as expected;
+- created images pushed to DockerHub;
+- docker-host removed.
+
+My DockerHub link is below:
+https://hub.docker.com/repository/docker/boriskamenetskiy/$SERVICE_NAME
+ 
+
+Issues:
+- after stopping post service ui_health was still equal to 1, though ui_health_post_availability dropped to 0.
+
