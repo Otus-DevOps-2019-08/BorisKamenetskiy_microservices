@@ -145,6 +145,7 @@ https://hub.docker.com/repository/docker/boriskamenetskiy/$SERVICE_NAME
 Issues:
 - after stopping post service ui_health was still equal to 1, though ui_health_post_availability dropped to 0.
 
+2020-01-11
 Monitoring-2 homework - what was done:
 - docker-host created and local environment configured to work with it;
 - monitoring and application separated - monitoring migrated to docker-compose-monitoring.yml;
@@ -187,4 +188,11 @@ Monitoring-2 homework - what was done:
 Issues:
 - comment service was not working because in docker-compose.yml comment_db was not added to mongodb aliases;
 - by mistake killed docker-host before checks passed, had to create dashboards again.
+
+2020-01-12
+Logging-1 homework - what was done:
+-
+
+Issues:
+-
 
