@@ -145,6 +145,7 @@ https://hub.docker.com/repository/docker/boriskamenetskiy/$SERVICE_NAME
 Issues:
 - after stopping post service ui_health was still equal to 1, though ui_health_post_availability dropped to 0.
 
+2020-01-11
 Monitoring-2 homework - what was done:
 - docker-host created and local environment configured to work with it;
 - monitoring and application separated - monitoring migrated to docker-compose-monitoring.yml;
@@ -187,4 +188,42 @@ Monitoring-2 homework - what was done:
 Issues:
 - comment service was not working because in docker-compose.yml comment_db was not added to mongodb aliases;
 - by mistake killed docker-host before checks passed, had to create dashboards again.
+
+2020-01-12
+Logging-1 homework - what was done:
+- checked out updated code of reddit services from git;
+- added gcc and musl-dev installation to post-py container (Dockerfile);
+- images for post, ui, comment built;
+- docker-host created and local environment configured to work with docker-host;
+- docker-compose.yml created, fluentd, elasticsearch, kibana services added;
+- folder logging/fluentd created, corresponding Dockerfile added;
+- fluent.conf created in logging/fluentd;
+- fluentd driver for logging for post service added;
+- created image for fluentd;
+- after docker-compose up -d and creating several posts (checked logs in console as well) tried to open Kibana, but Kibana server was not available. The reason was, that for Kibana versions starting 7. nodes and cluster configuration are needed to initialize the cluster. Added discovery.type=single-node. Kibana started working;
+- created index pattern for Kibana;
+- investigated Kibana search, fields and visual interface in general;
+- filters for parsing json logs from post service added to fluent.conf;
+- fluentd re-built and several posts created, appropriate time interval in Kibana set;
+- posts logs were visible in Kibana and instead log field several more detailed fields are available;
+- search by post_create fulfilled;
+- fluentd driver for gathering logs added to docker-compose.yml;
+- ui service restarted - logs are not nice: log field is unstructured mess;
+- regular expression added to fluent.conf in order to parse service.ui logs;
+- fluentd image updated, Kibana restarted;
+- now logs are parsed for ui service;
+- instead of regular expression several grok templates were used (regular expressions are hard to read/update and are error-prone in general) - fluent.conf updated;
+- Kibana provided nice structured logs for some cases (for some cases logs are still unstructured, but didn't do * part of the homework);
+- zipkin service added to docker-compose-logging.yml;
+- ZIPKIN_ENABLED environment variable added to .env, .env.example and to environment section of each service;
+- Zipkin added to the same networks, in which the application works;
+- application re-deployed;
+- Zipkin web UI works fine, after several updates of the page with app search gives several traces;
+- investigated the obtained traces.
+
+Note: all necessary firewalls added while doing the homework.
+
+Issues:
+- most serious issue was with Kibana availability. I have understood, that the issue is with Elasticsearch myself after digging into logs, but asked for help, because was not aware about how to resolve the issue. As it is described above, initial cluster configuration for Elasticsearch versions higher than 7 must be provided. Read related articles concerning Elasticsearch;
+- changed $USER_NAME in docker_build.sh for ui, post and comment services to boriskamenetskiy. Otherwise had issues with building the application, as this variable was not set. Not the best way of resolving the issue, however, it helped. After fulfilling the homework have rolled back this change and reverted user name to $USER_NAME in all 3 docker_build.sh files.
 
