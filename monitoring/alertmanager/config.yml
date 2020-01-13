@@ -1,0 +1,11 @@
+global:
+  slack_api_url: 'https://hooks.slack.com/services/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'
+
+route:
+  receiver: 'slack-notifications'
+
+receivers:
+- name: 'slack-notifications'
+  slack_configs:
+  - channel: '#boris_kamenetskiy'
+
